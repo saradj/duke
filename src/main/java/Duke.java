@@ -24,7 +24,7 @@ public class Duke {
                     System.out.println("\t No tasks yet!");
                 else {
                     for (int i = 1; i <= nbTasks; i++) // looping to print all the saved tasks
-                        System.out.println("\t" + i + ": " + tasks[i - 1]);
+                        System.out.println("\t " + i + ". " + tasks[i - 1]);
                 }
             } else {
                 System.out.println("\t added: " + input);
