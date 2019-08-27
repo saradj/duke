@@ -21,29 +21,54 @@ public class Duke {
         String input = scanner.nextLine();  // Read user input
         while (!(input.equals("bye"))) { //Continue reading until user inputs bye
             System.out.println("\t" + line);
-
             if (input.equals("list")) {
                 if (tasks.isEmpty())
                     System.out.println("\t No tasks yet!");
                 else {
                     System.out.println("\t Here are the tasks in your list:");
                     for (int i = 1; i <= tasks.size(); i++) { // looping to print all the saved tasks
-                        System.out.println("\t" + i + ".[" + tasks.get(i - 1).getStatusIcon() + "] " + tasks.get(i - 1).getDescription());
+                        System.out.println("\t " + i + "." + tasks.get(i - 1).toString());
                     }
                 }
             } else {
                 if (input.isBlank())
                     System.out.println("Please enter a valid task");
-                else if (input.length() > 5 && input.substring(0, 4).equals("done")) {
-                    int taskNb = Integer.parseInt(input.substring(5));
-                    System.out.println("\t Nice! I've marked this task as done:");
-                    if (taskNb < tasks.size() && taskNb > 0) {
-                        tasks.get(taskNb - 1).markAsDone();
-                        System.out.println("\t [\u2713] " + tasks.get(taskNb - 1).getDescription());
-                    } else System.out.println("Enter a valid task number");
-                } else {
-                    System.out.println("\t added: " + input);
-                    tasks.add(new Task(input));// Adding a task
+                else {
+                    String[] spllited = input.split(" ", 2);
+                    Task newTask = null;
+
+                    switch (spllited[0]) {
+                        case "done":
+                            if (input.length() > 5) {
+                                int taskNb = Integer.parseInt(spllited[1]);
+                                if (taskNb <= tasks.size() && taskNb > 0) {
+                                    tasks.get(taskNb - 1).markAsDone();
+                                    System.out.println("\t Nice! I've marked this task as done:");
+                                    System.out.println("\t " + tasks.get(taskNb - 1).toString());
+                                } else System.out.println("Enter a valid task number");
+                            } else System.out.println("Need to enter a task number after done!");
+                            break;
+                        case "todo":
+                            newTask = new Todo(spllited[1]);
+                            break;
+                        case "deadline":
+                            String getBy[] = spllited[1].split("/by ", 2);
+                            newTask = new Deadline(getBy[0], getBy[1]);
+
+                            break;
+                        case "event":
+                            String getAt[] = spllited[1].split("/at ", 2);
+                            newTask = new Event(getAt[0], getAt[1]);
+                            break;
+                        default:
+                            System.out.println("task type invalid!");
+                    }
+                    if (newTask != null) {
+                        tasks.add(newTask);
+                        System.out.println("\t Got it. I've added this task: ");
+                        System.out.println("\t "+ newTask.toString());
+                        System.out.println("\t Now you have " + tasks.size() + " tasks in the list.");
+                    }
                 }
             }
             System.out.println("\t" + line);
