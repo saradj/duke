@@ -13,7 +13,6 @@ public class Duke {
         String line = "____________________________________________________________";
         //System.out.println("Hello from\n" + logo);
         List<Task> tasks = new ArrayList<>();
-        int nbTasks = 0;
         System.out.println("\t" + line);
         System.out.println("\t Hello! I'm Duke");
         System.out.println("\t What can I do for you?");
