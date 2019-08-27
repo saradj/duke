@@ -11,7 +11,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String line = "____________________________________________________________";
-        //System.out.println("Hello from\n" + logo);
         List<Task> tasks = new ArrayList<>();
         System.out.println("\t" + line);
         System.out.println("\t Hello! I'm Duke");
@@ -19,7 +18,7 @@ public class Duke {
         System.out.println("\t" + line);
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String input = scanner.nextLine();  // Read user input
-        while (!(input.equals("bye"))) { //Continue reading until user inputs bye
+        while (!(input.equals("bye"))) { //Continue reading until user inputs until bye
             System.out.println("\t" + line);
             if (input.equals("list")) {
                 if (tasks.isEmpty())
@@ -31,10 +30,10 @@ public class Duke {
                     }
                 }
             } else {
-                String[] splitted = input.split(" ", 2);
+                String[] splitted = input.split(" ", 2);// splitted contains the keyword and the rest (description or task number)
                 Task newTask = null;
                 try {
-                    switch (splitted[0]) {
+                    switch (splitted[0]) { // switching on the keyword
                         case "done":
                             if (splitted.length == 2) {
                                 int taskNb = Integer.parseInt(splitted[1]);
