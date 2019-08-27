@@ -19,6 +19,33 @@ public class Duke {
         String line = "____________________________________________________________";
         List<Task> tasks = new ArrayList<>();
         Path path = Paths.get("C:\\Users\\Sara\\duke\\duke.txt");
+       try {
+           List<String> contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+
+           for (String next : contentSoFar) {
+               String[] words = next.split("|");
+               switch (words[0]) {
+                   case "T":
+                       tasks.add(new Todo(words[4]));
+                       if (words[2].equals("1"))
+                           tasks.get(tasks.size()-1).markAsDone();
+                       break;
+                   case "D":
+                       tasks.add(new Deadline(words[4], words[5]));
+                       if (words[2].equals("1"))
+                           tasks.get(tasks.size()-1).markAsDone();
+                       break;
+                   default:
+                       tasks.add(new Event(words[4], words[5]));
+                       if (words[2].equals("1"))
+                           tasks.get(tasks.size()-1).markAsDone();
+                       break;
+               }
+
+           }
+       }catch (IOException E){
+
+       }
         System.out.println("\t" + line);
         System.out.println("\t Hello! I'm Duke");
         System.out.println("\t What can I do for you?");
@@ -49,7 +76,7 @@ public class Duke {
                                     if (taskNb <= tasks.size() && taskNb > 0) {
                                         tasks.get(taskNb - 1).markAsDone();
                                         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-                                        fileContent.set(taskNb, tasks.get(taskNb - 1).printInFile());
+                                        fileContent.set(taskNb, tasks.get(taskNb - 1).printInFile()); // changing the file content
                                         Files.write(path, fileContent, StandardCharsets.UTF_8);
                                         System.out.println("\t Nice! I've marked this task as done:");
                                         System.out.println("\t " + tasks.get(taskNb - 1).toString());
