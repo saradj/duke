@@ -21,23 +21,22 @@ public class Duke {
         Path path = Paths.get("C:\\Users\\Sara\\duke\\duke.txt");
        try {
            List<String> contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-
            for (String next : contentSoFar) {
-               String[] words = next.split("|");
+               String[] words = next.split("\\|");
                switch (words[0]) {
                    case "T":
-                       tasks.add(new Todo(words[4]));
-                       if (words[2].equals("1"))
+                       tasks.add(new Todo(words[2]));
+                       if (words[1].equals("1"))
                            tasks.get(tasks.size()-1).markAsDone();
                        break;
                    case "D":
-                       tasks.add(new Deadline(words[4], words[5]));
-                       if (words[2].equals("1"))
+                       tasks.add(new Deadline(words[2], words[3]));
+                       if (words[1].equals("1"))
                            tasks.get(tasks.size()-1).markAsDone();
                        break;
                    default:
-                       tasks.add(new Event(words[4], words[5]));
-                       if (words[2].equals("1"))
+                       tasks.add(new Event(words[2], words[3]));
+                       if (words[1].equals("1"))
                            tasks.get(tasks.size()-1).markAsDone();
                        break;
                }
