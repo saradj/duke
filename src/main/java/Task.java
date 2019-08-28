@@ -33,7 +33,7 @@ public class Task {
         return "";
     }
 
-    private static String getDaySuffix(int n) {
+    static String getDaySuffix(int n) {
         if (n >= 11 && n <= 13) {
             return "th";
         }
@@ -48,13 +48,13 @@ public class Task {
                 return "th";
         }
     }
-    private static Date getDate(String date) {
+    static Date getDate(String date) {
         DateFormat dateFormat = (date.length() > 11) ? new SimpleDateFormat("dd/MM/yyyy hhmm") : new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date d = dateFormat.parse(date);
             return d;
         } catch (ParseException e) {
-            System.out.println("here!" + e.getMessage());
+            //case the date was not valid!
         }
         return null;
     }
