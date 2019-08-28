@@ -74,7 +74,7 @@ public class Duke {
                                     if (taskNb <= tasks.size() && taskNb > 0) {
                                         tasks.get(taskNb - 1).markAsDone();
                                         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-                                        fileContent.set(taskNb, tasks.get(taskNb - 1).printInFile()); // changing the file content
+                                        fileContent.set(taskNb-1, tasks.get(taskNb - 1).printInFile()); // changing the file content
                                         Files.write(path, fileContent, StandardCharsets.UTF_8);
                                         System.out.println("\t Nice! I've marked this task as done:");
                                         System.out.println("\t " + tasks.get(taskNb - 1).toString());
