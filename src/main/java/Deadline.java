@@ -28,6 +28,8 @@ public class Deadline extends Task {
 
 
     private String getDateString(Date date) {
+        if(date==null)
+            return by;
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         String pattern = by.length() > 11 ? "d'" + getDaySuffix(localDate.getDayOfMonth()) + "' 'of' MMMM yyyy, ha " : "d'" + getDaySuffix(localDate.getDayOfMonth()) + "' 'of' MMMM yyyy";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
@@ -36,6 +38,6 @@ public class Deadline extends Task {
 
     @Override
     public String printInFile() {
-        return this.isDone ? "D|1|" + this.getDescription() + "|" + this.by : "D|0|" + this.getDescription() + "|" + this.by;
+        return this.isDone ? "D|1|" + this.getDescription() + "|" + this.getDateString(date) : "D|0|" + this.getDescription() + "|" + this.getDateString(date);
     }
 }
