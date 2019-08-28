@@ -1,3 +1,8 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 public class Event extends Task {
     protected String at;
 
@@ -13,5 +18,11 @@ public class Event extends Task {
 
     public String printInFile() {
         return this.isDone ? "E|1|" + this.getDescription() + "|" + this.at : "E|0|" + this.getDescription() + "|" + this.at;
+    }
+    private String getDateString(Date date) {
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String pattern = at.length() > 11 ? "d'" + getDaySuffix(localDate.getDayOfMonth()) + "' 'of' MMMM yyyy, ha " : "d'" + getDaySuffix(localDate.getDayOfMonth()) + "' 'of' MMMM yyyy";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+        return formatter.format(date);
     }
 }

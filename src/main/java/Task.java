@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -26,5 +31,31 @@ public class Task {
 
     public String printInFile() {
         return "";
+    }
+
+    private static String getDaySuffix(int n) {
+        if (n >= 11 && n <= 13) {
+            return "th";
+        }
+        switch (n % 10) {
+            case 1:
+                return "st";
+            case 2:
+                return "nd";
+            case 3:
+                return "rd";
+            default:
+                return "th";
+        }
+    }
+    private static Date getDate(String date) {
+        DateFormat dateFormat = (date.length() > 11) ? new SimpleDateFormat("dd/MM/yyyy hhmm") : new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date d = dateFormat.parse(date);
+            return d;
+        } catch (ParseException e) {
+            System.out.println("here!" + e.getMessage());
+        }
+        return null;
     }
 }
