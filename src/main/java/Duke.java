@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,32 +19,31 @@ public class Duke {
         String line = "____________________________________________________________";
         List<Task> tasks = new ArrayList<>();
         Path path = Paths.get("C:\\Users\\Sara\\duke\\duke.txt");
-       try {
-           List<String> contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-           for (String next : contentSoFar) {
-               String[] words = next.split("\\|");
-               switch (words[0]) {
-                   case "T":
-                       tasks.add(new Todo(words[2]));
-                       if (words[1].equals("1"))
-                           tasks.get(tasks.size()-1).markAsDone();
-                       break;
-                   case "D":
-                       tasks.add(new Deadline(words[2], words[3]));
-                       if (words[1].equals("1"))
-                           tasks.get(tasks.size()-1).markAsDone();
-                       break;
-                   default:
-                       tasks.add(new Event(words[2], words[3]));
-                       if (words[1].equals("1"))
-                           tasks.get(tasks.size()-1).markAsDone();
-                       break;
-               }
-
-           }
-       }catch (IOException E){
-
-       }
+        try {
+            List<String> contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));// getting the data from the hard disk until now
+            for (String next : contentSoFar) {
+                String[] words = next.split("\\|");// splitting each line to extract the task type - words[0], done or not words-[1], description- words[2] and possibly due date words[3]
+                switch (words[0]) {
+                    case "T":
+                        tasks.add(new Todo(words[2]));
+                        if (words[1].equals("1"))
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(words[2], words[3]));
+                        if (words[1].equals("1"))
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        break;
+                    default:
+                        tasks.add(new Event(words[2], words[3]));
+                        if (words[1].equals("1"))
+                            tasks.get(tasks.size() - 1).markAsDone();
+                        break;
+                }
+            }
+        } catch (IOException E) {
+            // No old tasks, ready to start now!
+        }
         System.out.println("\t" + line);
         System.out.println("\t Hello! I'm Duke");
         System.out.println("\t What can I do for you?");
@@ -66,8 +65,8 @@ public class Duke {
                 String[] splitted = input.split(" ", 2);// splitted contains the keyword and the rest (description or task number)
                 Task newTask = null;
                 try {
-                    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                            new FileOutputStream("duke.txt", true), "utf-8"))) {
+                    try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                            new FileOutputStream("duke.txt", true), StandardCharsets.UTF_8))) {
                         switch (splitted[0]) { // switching on the keyword
                             case "done":
                                 if (splitted.length == 2) {
@@ -107,7 +106,6 @@ public class Duke {
                                 break;
                             default:
                                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
-
                         }
                         if (newTask != null) {
                             tasks.add(newTask);
@@ -116,7 +114,7 @@ public class Duke {
                             System.out.println(tasks.size() == 1 ? "\t Now you have " + tasks.size() + " task in the list." : "\t Now you have " + tasks.size() + " tasks in the list.");
 
                             writer.write(newTask.printInFile());
-                            ((BufferedWriter) writer).newLine();
+                            writer.newLine();
                         }
                         writer.close();
                     } catch (IOException e) {
