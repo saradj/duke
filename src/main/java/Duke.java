@@ -104,6 +104,21 @@ public class Duke {
                                     throw new DukeException("The description of a deadline must contain /at data and time from-to!");
                                 newTask = new Event(getAt[0], getAt[1]);
                                 break;
+                            case "delete":
+                                if(splitted.length==2) {
+                                    int taskNb = Integer.parseInt(splitted[1]);
+                                    if (taskNb <= tasks.size() && taskNb > 0) {
+                                Task removed=tasks.remove(taskNb-1);
+                                        List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+                                        fileContent.remove(taskNb-1); // changing the file content
+                                        Files.write(path, fileContent, StandardCharsets.UTF_8);
+                                        System.out.println("\t Noted. I've removed this task:");
+                                        System.out.println("\t " + removed.toString());
+                                        System.out.println(tasks.size() == 1 ? "\t Now you have " + tasks.size() + " task in the list." : "\t Now you have " + tasks.size() + " tasks in the list.");
+                                    } else
+                                        throw new DukeException("Enter a valid task number after done, between 1 and " + tasks.size());
+                                }else throw new DukeException("Need a task number after done!");
+                                break;
                             default:
                                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         }
