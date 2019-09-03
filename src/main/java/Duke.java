@@ -104,6 +104,23 @@ public class Duke {
                                     throw new DukeException("The description of a deadline must contain /at data and time from-to!");
                                 newTask = new Event(getAt[0], getAt[1]);
                                 break;
+                            case "find":
+                                if(splitted.length==2){
+                                    StringBuilder sb= new StringBuilder();
+                                    int i=1;
+                                for( Task task : tasks){
+                                    if(task.getDescription().contains(splitted[1])){
+                                        sb.append(i++).append(".").append(task.toString());
+                                        sb.append(System.lineSeparator());
+                                    }
+                                }if(sb.length()==0){
+                                        System.out.println("No matching tasks found! ");
+                                    }else
+                                        System.out.println("\t Here are the matching tasks in your list:");
+                                sb.setLength(sb.length()-1);// to remove the last new line
+                                    System.out.println(sb.toString());
+                                } else throw new DukeException("Need a word to find! ");
+                                break;
                             case "delete":
                                 if(splitted.length==2) {
                                     int taskNb = Integer.parseInt(splitted[1]);
@@ -135,7 +152,8 @@ public class Duke {
                         System.out.println("IO problems, can not open file:" + e.getMessage());
                     }
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("exception caught: "+ e.getMessage());
+                    e.printStackTrace();
                 }
             }
             System.out.println("\t" + line);
