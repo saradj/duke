@@ -127,7 +127,6 @@ public class Duke {
                             System.out.println("\t Got it. I've added this task: ");
                             System.out.println("\t " + newTask.toString());
                             System.out.println(tasks.size() == 1 ? "\t Now you have " + tasks.size() + " task in the list." : "\t Now you have " + tasks.size() + " tasks in the list.");
-
                             writer.write(newTask.printInFile());
                             writer.newLine();
                         }
