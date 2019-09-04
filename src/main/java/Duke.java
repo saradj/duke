@@ -152,8 +152,7 @@ public class Duke {
                         System.out.println("IO problems, can not open file:" + e.getMessage());
                     }
                 } catch (Exception e) {
-                    System.out.println("exception caught: "+ e.getMessage());
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
             System.out.println("\t" + line);
