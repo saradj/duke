@@ -110,7 +110,7 @@ public class Duke {
                                     int i=1;
                                 for( Task task : tasks){
                                     if(task.getDescription().contains(splitted[1])){
-                                        sb.append(i++).append(".").append(task.toString());
+                                        sb.append("\t ").append(i++).append(".").append(task.toString());
                                         sb.append(System.lineSeparator());
                                     }
                                 }if(sb.length()==0){
