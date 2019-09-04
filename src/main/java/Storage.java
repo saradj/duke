@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,21 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    Path path ;
-    List<String> contentSoFar;
-    List<Task> tasks;
+    private Path path;
+    private List<String> contentSoFar;
+    private List<Task> tasks;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         path = Paths.get(filePath);
-        tasks=new ArrayList<>();
+        tasks = new ArrayList<>();
     }
+
     public List<Task> load() throws DukeException {
 
         try {
             contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));// getting the data from the hard disk until now
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new DukeException(" ");
+            File file = new File("data\\tasks.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                throw new DukeException("Could not create a tasks.txt file in the specified directory");
+            }
         }
         for (String next : contentSoFar) {
             String[] words = next.split("\\|");// splitting each line to extract the task type - words[0], done or not words-[1], description- words[2] and possibly due date words[3]
@@ -45,20 +51,23 @@ public class Storage {
         }
         return tasks;
     }
-    public Path getPath(){
+
+    public Path getPath() {
         return path;
     }
+
     public void changeContent(int taskNb) throws DukeException {
         try {
             contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-            contentSoFar.set(taskNb - 1, tasks.get(taskNb - 1).printInFile()); // changing the file content
+            contentSoFar.set(taskNb, tasks.get(taskNb).printInFile()); // changing the file content
             Files.write(path, contentSoFar, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
-        throw new DukeException("Error while reading/writing in the duke.txt file");
+            throw new DukeException("Error while reading/writing in the duke.txt file");
+        }
     }
-    }
-    public  void addCommandInFile(String task) throws IOException {
+
+    public void addCommandInFile(String task) throws IOException {
         contentSoFar = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         contentSoFar.add(task);
         Files.write(path, contentSoFar, StandardCharsets.UTF_8);

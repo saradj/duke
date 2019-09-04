@@ -1,4 +1,5 @@
 public class Todo extends Task {
+
     public Todo(String description) {
         super(description);
     }
@@ -9,6 +10,6 @@ public class Todo extends Task {
     }
 
     public String printInFile() {
-        return this.isDone ? "T|1|" + this.getDescription() : "T|0|" + this.getDescription();
+        return this.isDone() ? "T|1|" + this.getDescription() : "T|0|" + this.getDescription();
     }
 }

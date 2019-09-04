@@ -1,8 +1,4 @@
-
-
-
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -17,6 +13,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -34,8 +31,8 @@ public class Duke {
             }
         }
     }
-        public static void main(String[] args) {
-            new Duke("data/tasks.txt").run();
-        }
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
+}
 

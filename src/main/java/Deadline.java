@@ -1,13 +1,11 @@
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
 public class Deadline extends Task {
-    protected String by;
-    protected Date date;
+    private String by;
+    private Date date;
 
     public Deadline(String description, String by) {
         super(description);
@@ -34,6 +32,6 @@ public class Deadline extends Task {
     }
 
     public String printInFile() {
-        return this.isDone ? "D|1|" + this.getDescription() + "|" + this.getDateString(date) : "D|0|" + this.getDescription() + "|" + this.getDateString(date);
+        return this.isDone() ? "D|1|" + this.getDescription() + "|" + this.getDateString(date) : "D|0|" + this.getDescription() + "|" + this.getDateString(date);
     }
 }

@@ -1,10 +1,11 @@
 import java.io.IOException;
-
 public class AddCommand extends Command {
-Task task;
-public AddCommand(Task task){
-    this.task=task;
-}
+
+    private Task task;
+    public AddCommand(Task task) {
+        this.task = task;
+    }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addTask(task);

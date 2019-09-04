@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -33,6 +33,10 @@ public class Task {
         return "";
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     static String getDaySuffix(int n) {
         if (n >= 11 && n <= 13) {
             return "th";
@@ -48,11 +52,12 @@ public class Task {
                 return "th";
         }
     }
+
     static Date getDate(String date) {
         DateFormat dateFormat = (date.length() > 11) ? new SimpleDateFormat("dd/MM/yyyy hhmm") : new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date d = dateFormat.parse(date);
-            return d;
+             dateFormat.parse(date);
+            return dateFormat.parse(date);
         } catch (ParseException e) {
             //case the date was not valid!
         }
