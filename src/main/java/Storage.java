@@ -24,10 +24,14 @@ public class Storage {
         } catch (IOException e) {
             File file = new File("data\\tasks.txt");
             try {
+                File folder = new File("data");
+                folder.mkdir();
                 file.createNewFile();
+                contentSoFar = new ArrayList<>();
             } catch (IOException ex) {
                 throw new DukeException("Could not create a tasks.txt file in the specified directory");
             }
+
         }
         for (String next : contentSoFar) {
             String[] words = next.split("\\|");// splitting each line to extract the task type - words[0], done or not words-[1], description- words[2] and possibly due date words[3]
