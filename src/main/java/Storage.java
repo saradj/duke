@@ -62,7 +62,6 @@ public class Storage {
             contentSoFar.set(taskNb, tasks.get(taskNb).printInFile()); // changing the file content
             Files.write(path, contentSoFar, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new DukeException("Error while reading/writing in the duke.txt file");
         }
     }
