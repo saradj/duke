@@ -1,3 +1,6 @@
+/**
+ * Represents a specific {@link Command} used to list all the {@link Task}s in the {@link TaskList}
+ */
 public class ListCommand extends Command {
 
     @Override

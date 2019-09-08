@@ -3,6 +3,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @param filePath used to specify the location of the file in the hard disc
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -14,6 +17,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The execution core of the Duke class
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Represents an Event, a {@link Task} which is happening at a specific Date and time
+ */
 public class Event extends Task {
     private String at;
     private Date date;
@@ -17,11 +20,19 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + getDateString(date) + ")";
     }
-
+     /**
+     * Returns the String representation of the {@link Event} in format compatible to be easily read and written in a text file on the hard disc
+     * @return String used to print the {@link Task } in the text file
+     */
     public String printInFile() {
         return this.isDone() ? "E|1|" + getDescription() + "|" + this.getDateString(date) : "E|0|" + this.getDescription() + "|" + getDateString(date);
     }
 
+    /**
+     * Returns the {@link Date } instance as a String to be printed in the file
+     * @param date the {@link Date} at which the event is happening
+     * @return String the date for the event
+     */
     private String getDateString(Date date) {
         if (date == null)
             return at;

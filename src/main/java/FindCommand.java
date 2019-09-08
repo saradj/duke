@@ -1,3 +1,6 @@
+/**
+ * Represents a specific {@link Command} used to find a String occurring in the {@link TaskList}
+ */
 public class FindCommand extends Command {
 
     private String toFind;

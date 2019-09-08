@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Represents the user interaction, used for getting the user input and printing the output on the screen
+ */
 public class Ui {
 
     private Scanner scanner;
@@ -10,6 +13,9 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Used to print the greeting message from {@link Duke}
+     */
     public void showWelcome() {
         System.out.println("\t" + line);
         System.out.println("\t Hello! I'm Duke");
@@ -17,6 +23,10 @@ public class Ui {
         System.out.println("\t" + line);
     }
 
+    /**
+     * Returns the input entered by the user
+     * @return String the input entered by the user
+     */
     public String readCommand() {
         input = scanner.nextLine();
         return input;

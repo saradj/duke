@@ -1,5 +1,14 @@
+/**
+ * Represents a parser used to parse the input String from the user into a Duke understandable {@link Command}
+ */
 public class Parser {
 
+    /**
+     * Returns a {@link Command} that can be understood by {@link Duke} and executed after
+     * @param fullCommand the String command entered by the user
+     * @return Command the Command to be executed
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitted = fullCommand.split(" ", 2);// splitted contains the keyword and the rest (description or task number)
         switch (splitted[0]) { // switching on the keyword

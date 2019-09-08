@@ -4,6 +4,9 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a specific {@link Command} used to delete a {@link Task} from the {@link TaskList}
+ */
 public class DeleteCommand extends Command {
     private int taskNb;
 

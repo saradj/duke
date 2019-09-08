@@ -1,3 +1,6 @@
+/**
+ * Represents a specific {@link Command} used to mark a {@link Task} as done
+ */
 public class DoneCommand extends Command {
     private int taskNb;
 
