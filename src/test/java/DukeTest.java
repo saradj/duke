@@ -7,10 +7,17 @@ public class DukeTest {
     public void dummyTest(){
         assertEquals(2, 2);
     }
+
     @Test
     public void testExitCommand() throws DukeException {
            Duke duke= new Duke("data/tasks.txt");
             Command c=Parser.parse("bye");
          assertTrue(c instanceof ExitCommand);
+    }
+    @Test
+    public void testAddCommand() throws DukeException {
+        Duke duke= new Duke("data/tasks.txt");
+        Command c=Parser.parse("todo project");
+        assertTrue(c instanceof AddCommand);
     }
 }
